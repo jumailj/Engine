@@ -1,19 +1,19 @@
 #pragma once
-#include <iostream>
 
 #ifdef ENGINE_PLATFORM_WINDOWS
 
 extern Engine::Application* Engine::CreateApplication();
 
+
 int main(int argc, char *argv[]) 
 {
-	std::cout << "Welcome to Engine!" << std::endl;
-	auto app = Engine::CreateApplication();
+	Engine::Log::Init();
+	LOG_ENGINE_CORE_INFO("Welcome To Engine");
+	LOG_INFO("Welcome to the Engine-editor");
+
+	Engine::Application *app = Engine::CreateApplication();
 	app->Run();
 	delete app;
-
-
 }
-
 
 #endif
