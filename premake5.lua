@@ -14,6 +14,10 @@ project "Engine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}") 
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "EnginePCH.h"
+	pchsource "Engine/src/EnginePCH.cpp" --for vs
+
+
 	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
 	includedirs {"%{prj.name}/vendor/spdlog/include", "%{prj.name}/src"}
 

@@ -3,8 +3,6 @@
 
 #include <Engine/Core.h>
 #include <spdlog/fmt/ostr.h> // ostream(operator overloading spdlog)
-#include <string>
-#include <functional>
 
 namespace Engine {
 
