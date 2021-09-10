@@ -1,5 +1,7 @@
 #pragma once
 #include "Core.h"
+#include "Events/Event.h"
+#include <Engine/Window.h>
 
 namespace Engine {
 
@@ -11,7 +13,10 @@ namespace Engine {
 		virtual ~Application();
 
 		void Run();
+	private:
 
+		std::shared_ptr<Window> m_Window;
+		bool m_Running = true;
 	};
 
 	 // to be define in CLIENT

@@ -6,6 +6,14 @@ workspace "Engine"
 
 	outputdir= "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+	--include dir relative to root folder(sln dir)
+
+	IncludeDir = {}
+	IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+
+	--include the glfw premake files
+	include "Engine/vendor/GLFW"
+
 project "Engine"
 	location "Engine"
 	kind "SharedLib" --dll
@@ -19,9 +27,12 @@ project "Engine"
 
 
 	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
-	includedirs {"%{prj.name}/vendor/spdlog/include", "%{prj.name}/src"}
 
-	filter	"system:windows"
+	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}"}
+
+	links { "GLFW", "opengl32.lib"}
+									  
+	filter	"system:windows"		  
 		cppdialect "c++17"
 		staticruntime"On"
 		systemversion "latest"
@@ -43,7 +54,6 @@ project "Engine"
 		defines "ENGINE_SHIP"
 		optimize "On"
 
-
 project "Sandbox"
 	location "Sandbox"
 	kind "consoleApp"
@@ -56,7 +66,7 @@ project "Sandbox"
 
 	includedirs {"Engine/vendor/spdlog/include", "Engine/src"}
 
-	links { "Engine"}
+	links {"Engine"}
 
 	filter	"system:windows"
 		cppdialect "c++17"
