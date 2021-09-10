@@ -1,5 +1,6 @@
 #files
 *.vs
+*.sln
 
 #folders
 /bin
