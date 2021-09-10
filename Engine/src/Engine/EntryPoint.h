@@ -8,8 +8,8 @@ extern Engine::Application* Engine::CreateApplication();
 int main(int argc, char *argv[]) 
 {
 	Engine::Log::Init();
-	LOG_ENGINE_CORE_INFO("Welcome To Engine");
-	LOG_INFO("Welcome to the Engine-editor");
+	LOG_CORE_INFO("Welcome To Engine");
+	LOG_INFO("Welcome to SandBox");
 
 	Engine::Application *app = Engine::CreateApplication();
 	app->Run();
