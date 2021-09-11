@@ -10,9 +10,11 @@ workspace "Engine"
 
 	IncludeDir = {}
 	IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
+	IncludeDir["Glad"] = "Engine/vendor/Glad/include"
 
 	--include the glfw premake files
 	include "Engine/vendor/GLFW"
+	include "Engine/vendor/Glad"
 
 project "Engine"
 	location "Engine"
@@ -28,16 +30,16 @@ project "Engine"
 
 	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
 
-	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}"}
+	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}"}
 
-	links { "GLFW", "opengl32.lib"}
+	links { "GLFW","Glad", "opengl32.lib"}
 									  
 	filter	"system:windows"		  
 		cppdialect "c++17"
 		staticruntime"On"
 		systemversion "latest"
 
-	defines {"ENGINE_PLATFORM_WINDOWS", "ENGINE_BUILD_DLL"}
+	defines {"ENGINE_PLATFORM_WINDOWS", "ENGINE_BUILD_DLL", "GLFW_INCLUDE_NONE"}
 
 	--copy engine.dll -> sandbox
 	postbuildcommands ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
