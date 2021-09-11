@@ -44,14 +44,17 @@ project "Engine"
 	
 	filter "configurations:Debug"
 		defines "ENGINE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Development"
 		defines "ENGINE_DEVELOPMENT"
+		buildoptions "/MDd"
 		optimize "On"
 
 	filter "configurations:Ship"
 		defines "ENGINE_SHIP"
+		buildoptions "/MDd"
 		optimize "On"
 
 project "Sandbox"
@@ -78,12 +81,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "ENGINE_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Development"
 		defines "ENGINE_DEVELOPMENT"
+		buildoptions "/MDd"
 		optimize "On"
 
 	filter "configurations:Ship"
 		defines "ENGINE_SHIP"
+		buildoptions "/MDd"
 		optimize "On"
