@@ -14,7 +14,7 @@ namespace Engine {
 		unsigned int Width;
 		unsigned int Height;
 
-		WindowProps(const std::string& title = "Hazel Engine",
+		WindowProps(const std::string& title = "Engine",
 			unsigned int width = 1280,
 			unsigned int height = 720)
 			: Title(title), Width(width), Height(height)
@@ -26,7 +26,7 @@ namespace Engine {
 	class ENGINE_API Window
 	{
 	public:
-		using EventCallbackFn = std::function<void(Engine::Event&)>;
+		using EventCallbackFn = std::function<void(Event&)>; //::Engine::
 
 		virtual ~Window() {}
 
