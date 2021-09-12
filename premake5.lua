@@ -9,12 +9,15 @@ workspace "Engine"
 	--include dir relative to root folder(sln dir)
 
 	IncludeDir = {}
-	IncludeDir["GLFW"] = "Engine/vendor/GLFW/include"
-	IncludeDir["Glad"] = "Engine/vendor/Glad/include"
+	IncludeDir["GLFW"]  = "Engine/vendor/GLFW/include"
+	IncludeDir["Glad"]  = "Engine/vendor/Glad/include"
+	IncludeDir["ImGui"] ="Engine/vendor/imgui"
 
 	--include the glfw premake files
 	include "Engine/vendor/GLFW"
 	include "Engine/vendor/Glad"
+	include "Engine/vendor/imgui"
+	
 
 project "Engine"
 	location "Engine"
@@ -30,9 +33,9 @@ project "Engine"
 
 	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
 
-	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}"}
+	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}","%{IncludeDir.ImGui}" }
 
-	links { "GLFW","Glad", "opengl32.lib"}
+	links { "GLFW","Glad","ImGui", "opengl32.lib"}
 									  
 	filter	"system:windows"		  
 		cppdialect "c++17"
