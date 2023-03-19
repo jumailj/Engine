@@ -45,7 +45,6 @@ project "Engine"
 	defines {"ENGINE_PLATFORM_WINDOWS", "ENGINE_BUILD_DLL", "GLFW_INCLUDE_NONE"}
 
 	--copy engine.dll -> sandbox
-	postbuildcommands ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 	
 	filter "configurations:Debug"
 		defines "ENGINE_DEBUG"

@@ -1,11 +1,10 @@
 #include <EnginePCH.h>
+
 #include "Application.h"
-
-
 #include "Log.h"
-
-
 #include <glad/glad.h>
+#include "Input.h"
+
 
 namespace Engine {
 
@@ -20,7 +19,6 @@ namespace Engine {
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
-
 	}
 
 	Application::~Application()
@@ -59,12 +57,14 @@ namespace Engine {
 
 		while (m_Running) 
 		{
-			glClearColor(0.89f, 0.45f, 0.15f, 1.0f);
+			glClearColor(0.19f, 0.85f, 0.45f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 
+			auto [x, y] = Hazel::Input::GetMousePosition();
+			LOG_CORE_INFO("{0}, {1} hello ", x, y);
 
 			m_Window->OnUpdate();
 		}
