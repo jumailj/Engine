@@ -11,7 +11,8 @@ workspace "Engine"
 	IncludeDir = {}
 	IncludeDir["GLFW"]  = "Engine/vendor/GLFW/include"
 	IncludeDir["Glad"]  = "Engine/vendor/Glad/include"
-	IncludeDir["ImGui"] ="Engine/vendor/imgui"
+	IncludeDir["ImGui"] = "Engine/vendor/imgui"
+	IncludeDir["glm"] =   "Engine/vendor/glm"
 
 	--include the glfw premake files
 	include "Engine/vendor/GLFW"
@@ -31,9 +32,9 @@ project "Engine"
 	pchsource "Engine/src/EnginePCH.cpp" --for vs
 
 
-	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
+	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp", "%{prj.name}/vendor/glm/glm/**.hpp", "%{prj.name}/vendor/glm/glm/**.ini"}
 
-	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}","%{IncludeDir.ImGui}" }
+	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}","%{IncludeDir.ImGui}", "%{IncludeDir.glm}"}
 
 	links { "GLFW","Glad","ImGui", "opengl32.lib"}
 									  
@@ -43,6 +44,11 @@ project "Engine"
 		systemversion "latest"
 
 	defines {"ENGINE_PLATFORM_WINDOWS", "ENGINE_BUILD_DLL", "GLFW_INCLUDE_NONE"}
+
+	postbuildcommands
+	{
+		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+	}
 
 	--copy engine.dll -> sandbox
 	
@@ -71,7 +77,7 @@ project "Sandbox"
 
 	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
 
-	includedirs {"Engine/vendor/spdlog/include", "Engine/src"}
+	includedirs {"Engine/vendor/spdlog/include", "Engine/src", "%{IncludeDir.glm}"}
 
 	links {"Engine"}
 

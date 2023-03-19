@@ -63,8 +63,10 @@ namespace Engine {
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 
-			auto [x, y] = Hazel::Input::GetMousePosition();
-			LOG_CORE_INFO("{0}, {1} hello ", x, y);
+// 			auto [x, y] = Engine::Input::GetMousePosition();
+// 			LOG_CORE_INFO("{0}, {1} :: ", x, y);
+
+			
 
 			m_Window->OnUpdate();
 		}

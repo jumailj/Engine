@@ -4,7 +4,7 @@
 #include "Engine/Application.h"
 #include <GLFW/glfw3.h>
 
-namespace Hazel {
+namespace Engine {
 
 	Input* Input::s_Instance = new WindowsInput();
 

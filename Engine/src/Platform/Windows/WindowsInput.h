@@ -2,7 +2,7 @@
 
 #include "Engine/Input.h"
 
-namespace Hazel {
+namespace Engine {
 
 	class WindowsInput : public Input
 	{

@@ -2,7 +2,7 @@
 
 #include "Engine/Core.h"
 
-namespace Hazel {
+namespace Engine {
 
 	class ENGINE_API Input
 	{
