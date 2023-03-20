@@ -8,7 +8,10 @@
 #include "Engine/Events/Event.h"
 #include "Engine/Events/ApplicationEvent.h"
 
+
 #include "Engine/ImGui/ImGuiLayer.h"
+#include "Engine/Renderer/Shader.h"
+
 
 namespace Engine {
 
@@ -43,6 +46,8 @@ namespace Engine {
 		unsigned int m_VertexArray;
 		unsigned int m_VertexBuffer;
 		unsigned int m_IndexBuffer;
+
+		std::unique_ptr<Shader> m_Shader;
 
 
 	private:
