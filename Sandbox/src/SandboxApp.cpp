@@ -1,7 +1,5 @@
 #include <Engine.h>
 
-
-
 class ExampleLayer : public Engine::Layer {
 public:
 	ExampleLayer()
@@ -13,9 +11,8 @@ public:
 		//LOG_INFO("ExampleLayer::Update");
 
 		if (Engine::Input::IsKeyPressed(EG_KEY_TAB)) {
-
+			LOG_WARN("FIX NIC");
 		}
-			LOG_INFO("tab key is pressed");
 
 			if (Engine::Input::IsMouseButtonPressed(EG_MOUSE_BUTTON_1)) {
 
@@ -35,7 +32,7 @@ public:
 	Sandbox() {
 
 		 PushLayer(new ExampleLayer()); //EVENTS
-		 PushOverlay(new Engine::ImGuiLayer()); //IMGUI
+		// no-more PushOverlay(new Engine::ImGuiLayer()); //IMGUI
 	}
 
 	~Sandbox() {
