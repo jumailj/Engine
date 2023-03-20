@@ -158,8 +158,10 @@
     <ClInclude Include="src\Engine\LayerStack.h" />
     <ClInclude Include="src\Engine\Log.h" />
     <ClInclude Include="src\Engine\MouseButtonCodes.h" />
+    <ClInclude Include="src\Engine\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Engine\Window.h" />
     <ClInclude Include="src\EnginePCH.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -450,6 +452,7 @@
     <ClCompile Include="src\EnginePCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>

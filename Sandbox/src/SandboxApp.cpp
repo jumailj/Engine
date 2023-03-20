@@ -1,7 +1,5 @@
 #include <Engine.h>
-
 #include "imgui/imgui.h"
-
 
 class ExampleLayer : public Engine::Layer {
 public:
@@ -10,6 +8,7 @@ public:
 	{
 
 	}
+	// mainupdate loop;
 	void OnUpdate() override {
 		//LOG_INFO("ExampleLayer::Update");
 
@@ -24,16 +23,19 @@ public:
 
 	}
 
+	// graphics;
 	virtual void OnImGuiRender() override {
-// 		ImGui::Begin("test");
-// 		ImGui::Text("hello world");
-// 		ImGui::End();
+ 		ImGui::Begin("test");
+		ImGui::Text("hello world");
+		ImGui::Button("number");
+		ImGui::End();
 	}
 
 
-
+	// events;
 	void OnEvent(Engine::Event& event) override {
 		// LOG_TRACE("{0}", event);
+
 	}
 
 };
