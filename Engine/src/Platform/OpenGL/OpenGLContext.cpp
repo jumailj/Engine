@@ -19,17 +19,13 @@ namespace Engine {
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		ENGINE_CORE_ASSERT(status, "faile to initalize GLAD!");
 
+		LOG_CORE_INFO("Vendor: {0}", glGetString(GL_VENDOR));
+		LOG_CORE_INFO("Renderer: {0}", glGetString(GL_RENDERER));
+		LOG_CORE_INFO("Version: {0}", glGetString(GL_VERSION));
+
 	}
 	void OpenGLContext::SwapBuffers()
 	{
-
-		glBegin(GL_TRIANGLES);
-		glColor3f(0.84, 0.14, 0.19);
-		glVertex3f(0, 0, 0);
-		glVertex3f(1, 0, 0);
-		glVertex3f(0, 1, 0);
-		glEnd();
-
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }
