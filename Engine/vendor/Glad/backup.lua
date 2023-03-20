@@ -1,8 +1,7 @@
 project "Glad"
 	kind "StaticLib"
 	language "C"
-	staticruntime "on"
-	systemversion "latest"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -20,13 +19,16 @@ project "Glad"
 
 
 	filter "configurations:Debug"
+		defines "ENGINE_DEBUG"
 		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Development"
+		defines "ENGINE_DEVELOPMENT"
 		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Ship"
+		defines "ENGINE_SHIP"
 		runtime "Release"
 		optimize "On"

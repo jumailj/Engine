@@ -23,9 +23,9 @@ workspace "Engine"
 
 project "Engine"
 	location "Engine"
-	kind "StaticLib" --dll
+	kind "SharedLib" --dll
 	language "C++"
-	staticruntime "on"
+	staticruntime "off"
 	cppdialect "c++17"
 	systemversion "latest"
 
@@ -45,10 +45,10 @@ project "Engine"
 
 	defines {"ENGINE_PLATFORM_WINDOWS", "ENGINE_BUILD_DLL", "GLFW_INCLUDE_NONE"}
 
-	--postbuildcommands
-	--{
-	--	("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-	--}
+	postbuildcommands
+	{
+		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+	}
 
 	--copy engine.dll -> sandbox
 	
@@ -71,7 +71,7 @@ project "Sandbox"
 	location "Sandbox"
 	kind "consoleApp"
 	language "C++"
-	staticruntime "on"
+	staticruntime "off"
 	cppdialect "c++17"
 	systemversion "latest"
 

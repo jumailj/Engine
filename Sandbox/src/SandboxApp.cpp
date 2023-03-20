@@ -1,5 +1,8 @@
 #include <Engine.h>
 
+#include "imgui/imgui.h"
+
+
 class ExampleLayer : public Engine::Layer {
 public:
 	ExampleLayer()
@@ -20,6 +23,14 @@ public:
 		//	LOG_ERROR("MOUSE LEFT BUTTON IS PRESSED");
 
 	}
+
+	virtual void OnImGuiRender() override {
+// 		ImGui::Begin("test");
+// 		ImGui::Text("hello world");
+// 		ImGui::End();
+	}
+
+
 
 	void OnEvent(Engine::Event& event) override {
 		// LOG_TRACE("{0}", event);
