@@ -12,11 +12,15 @@ public:
 	void OnUpdate() override {
 		//LOG_INFO("ExampleLayer::Update");
 
-		if (Engine::Input::IsKeyPressed(EG_KEY_TAB))
+		if (Engine::Input::IsKeyPressed(EG_KEY_TAB)) {
+
+		}
 			LOG_INFO("tab key is pressed");
 
-		if (Engine::Input::IsMouseButtonPressed(EG_MOUSE_BUTTON_1))
-			LOG_ERROR("MOUSE LEFT BUTTON IS PRESSED");
+			if (Engine::Input::IsMouseButtonPressed(EG_MOUSE_BUTTON_1)) {
+
+		}
+		//	LOG_ERROR("MOUSE LEFT BUTTON IS PRESSED");
 
 	}
 
