@@ -37,7 +37,6 @@ public:
 		// LOG_TRACE("{0}", event);
 
 	}
-
 };
 
 class Sandbox : public Engine::Application {
