@@ -455,13 +455,13 @@
     <ClCompile Include="src\Engine\Layer.cpp" />
     <ClCompile Include="src\Engine\LayerStack.cpp" />
     <ClCompile Include="src\Engine\Log.cpp" />
-    <ClCompile Include="src\EnginePCH.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="src\Engine\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Engine\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Engine\Renderer\Shader.cpp" />
     <ClCompile Include="src\Engine\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\EnginePCH.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
