@@ -1,8 +1,9 @@
 #files
 *.vs
 *.sln
+*.idb
 
 #folders
 /bin
 /bin-int
-/Engine/vendor/Glad/bin-int
+/Engine/vendor/Glad/bin/
