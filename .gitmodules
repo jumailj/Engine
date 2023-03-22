@@ -10,5 +10,5 @@
 	url = https://github.com/g-truc/glm
 [submodule "Engine/vendor/GLFW"]
 	path = Engine/vendor/GLFW
-	url = https://github.com/jumailj/glfw
+	url =https://github.com/TheCherno/glfw
 	branch= master
