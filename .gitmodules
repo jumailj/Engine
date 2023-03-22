@@ -8,6 +8,6 @@
 [submodule "Engine/vendor/glm"]
 	path = Engine/vendor/glm
 	url = https://github.com/g-truc/glm
-[submodule "Engine/vendor/glfw"]
-	path = Engine/vendor/glfw
+[submodule "Engine/vendor/GLFW"]
+	path = Engine/vendor/GLFW
 	url = https://github.com/jumailj/GLFW
