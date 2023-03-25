@@ -9,8 +9,8 @@ namespace Engine {
 	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
 	{
 		switch (Renderer::GetAPI()) {
-		case RendererAPI::None: ENGINE_CORE_ASSERT(FALSE, "RendererAPI: None is currtnly not supported!"); return nullptr;
-		case RendererAPI::OpenGL: return new OpenGLVertexBuffer(vertices, size);
+		case RendererAPI::API::None: ENGINE_CORE_ASSERT(FALSE, "RendererAPI: None is currtnly not supported!"); return nullptr;
+		case RendererAPI::API::OpenGL: return new OpenGLVertexBuffer(vertices, size);
 		}
 
 		ENGINE_CORE_ASSERT(false, "unknown renderere API!");
@@ -21,8 +21,8 @@ namespace Engine {
 	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t size)
 	{
 		switch (Renderer::GetAPI()) {
-		case RendererAPI::None: ENGINE_CORE_ASSERT(FALSE, "RendererAPI: None is currtnly not supported!"); return nullptr;
-		case RendererAPI::OpenGL: return new OpenGLIndexBuffer(indices, size);
+		case RendererAPI::API::None: ENGINE_CORE_ASSERT(FALSE, "RendererAPI: None is currtnly not supported!"); return nullptr;
+		case RendererAPI::API::OpenGL: return new OpenGLIndexBuffer(indices, size);
 		}
 
 		ENGINE_CORE_ASSERT(false, "unknown renderere API!");

@@ -36,7 +36,6 @@ namespace Engine {
 		uint32_t Size;
 		bool Normalized;
 
-		BufferElement(){}
 
 		BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
 			: Name{ name }, Type{type}, Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
