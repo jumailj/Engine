@@ -12,6 +12,19 @@
 
 #include "engine/ImGui/ImGuiLayer.h"
 
+
+//-----------Renderere-------------------------
+#include "Engine/Renderer/Renderer.h"
+#include "Engine/Renderer/RenderCommand.h"
+
+#include "Engine/Renderer/Buffer.h"
+#include "Engine/Renderer/Shader.h"
+#include "Engine/Renderer/VertexArray.h"
+
+#include "Engine/Renderer/OrthographicCamera.h"
+//---------------------------------------------
+
+
 //----------Entry point........"
 #include <Engine/EntryPoint.h>
 
