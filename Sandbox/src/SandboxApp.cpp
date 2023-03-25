@@ -25,6 +25,7 @@ public:
 
 	// graphics;
 	virtual void OnImGuiRender() override {
+
  		ImGui::Begin("test");
 		ImGui::Text("hello world");
 		ImGui::Button("number");
@@ -34,6 +35,7 @@ public:
 
 	// events;
 	void OnEvent(Engine::Event& event) override {
+		// LOG_TRACE( event.ToString());
 		// LOG_TRACE("{0}", event);
 
 	}
