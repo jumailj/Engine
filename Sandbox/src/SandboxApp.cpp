@@ -39,17 +39,18 @@ public:
 
 		m_SquareVA.reset(Engine::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
 		Engine::Ref<Engine::VertexBuffer> squareVB;
 		squareVB.reset(Engine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
-			{ Engine::ShaderDataType::Float3, "a_Position" }
+			{ Engine::ShaderDataType::Float3, "a_Position" },
+			{ Engine::ShaderDataType::Float2, "a_TexCoord" }
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
@@ -129,6 +130,44 @@ public:
 
 		m_BlueShader.reset(Engine::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
 
+
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+
+			uniform vec3 u_Color;
+
+			void main()
+			{
+				color = vec4(v_TexCoord,0.0, 1.0);
+			}
+		)";
+
+		m_TextureShader.reset(Engine::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+
 	}
 	// main-update loop;
 	void OnUpdate(Engine::Timestep ts) override {
@@ -173,20 +212,25 @@ public:
 		
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		std::static_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->Bind();
-		std::static_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->UploadUniformFloat3("u_Color", m_SqureColor);
+		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->Bind();
+		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->UploadUniformFloat3("u_Color", m_SqureColor);
 
 		for (int y = 0; y < 10; y++) {
 
 			for (int x = 0; x < 10; x++) {
 
-				glm::vec3 pos(x * 0.11f, y*0.11f, 0.0f);
+				glm::vec3 pos(x * 0.13f, y*0.13f, 0.0f);
 				glm::mat4 transfrom = glm::translate(glm::mat4(1.0f), pos) * scale;
 				Engine::Renderer::Submit(m_BlueShader, m_SquareVA, transfrom);
 
 			}
 		}
-				Engine::Renderer::Submit(m_Shader, m_VertexArray);
+
+
+		Engine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); 
+		
+		// triangel;
+		// 	Engine::Renderer::Submit(m_Shader, m_VertexArray);
 
 
 		Engine::Renderer::EndScene();
@@ -212,7 +256,7 @@ private:
 	Engine::Ref<Engine::Shader> m_Shader;
 	Engine::Ref<Engine::VertexArray> m_VertexArray;
 
-	Engine::Ref<Engine::Shader> m_BlueShader;
+	Engine::Ref<Engine::Shader> m_BlueShader, m_TextureShader;
 	Engine::Ref<Engine::VertexArray> m_SquareVA;
 
 	Engine::OrthographicCamera m_Camera;
