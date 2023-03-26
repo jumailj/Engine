@@ -4,7 +4,7 @@
 class ExampleLayer : public Engine::Layer {
 public:
 	ExampleLayer()
-		:Layer("Example"), m_Camera( - 1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+		:Layer("Example"), m_Camera( - 1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_CameraRotation{0.0f}
 	{
 
 		m_VertexArray.reset(Engine::VertexArray::Create());
@@ -118,32 +118,35 @@ public:
 		m_BlueShader.reset(new Engine::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
 
 	}
-	// mainupdate loop;
-	void OnUpdate() override {
+	// main-update loop;
+	void OnUpdate(Engine::Timestep ts) override {
+
+		LOG_INFO("DELTA TIME: {0}s ({1} ms)", ts.GetSeconds(), ts.GetMilliseconds());
+	// 	float time = ts;
 
 		if (Engine::Input::IsKeyPressed( EG_KEY_LEFT))
 		{
-			m_CameraPosition.x -= m_CameraSpeed;
+			m_CameraPosition.x -= m_CameraSpeed * ts;
 		}
 		else if (Engine::Input::IsKeyPressed(EG_KEY_RIGHT))
 		{
-			m_CameraPosition.x += m_CameraSpeed;
+			m_CameraPosition.x += m_CameraSpeed * ts;
 		}
 
 		if (Engine::Input::IsKeyPressed(EG_KEY_UP))
 		{
-			m_CameraPosition.y += m_CameraSpeed;
+			m_CameraPosition.y += m_CameraSpeed *ts;
 		}
 		else if (Engine::Input::IsKeyPressed(EG_KEY_DOWN))
 		{
-			m_CameraPosition.y -= m_CameraSpeed;
+			m_CameraPosition.y -= m_CameraSpeed* ts;
 		}
 
 		if (Engine::Input::IsKeyPressed(EG_KEY_A)) {
-			m_CameraRotation += 2.0f;
+			m_CameraRotation += 10.0f * ts;
 		}
 		if (Engine::Input::IsKeyPressed(EG_KEY_D)) {
-			m_CameraRotation -= 2.0f;
+			m_CameraRotation -= 10.0f* ts;
 		}
 
 
@@ -162,7 +165,7 @@ public:
 
 	}
 
-	// graphics;
+	// gui-graphics;
 	virtual void OnImGuiRender() override {
 
 	}
@@ -171,7 +174,6 @@ public:
 	void OnEvent(Engine::Event& event) override {
 
 	}
-
 
 
 private:
@@ -184,7 +186,7 @@ private:
 	Engine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
 	float m_CameraRotation = 0.0f;
-	float m_CameraSpeed = 0.1f;
+	float m_CameraSpeed = 1.0f;
 
 
 };
