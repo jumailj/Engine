@@ -119,9 +119,11 @@ public:
 
 			in vec3 v_Position;
 
+			uniform vec4 u_Color;
+
 			void main()
 			{
-				color = vec4(0.2, 0.3, 0.8, 1.0);
+				color = u_Color;
 			}
 		)";
 
@@ -131,7 +133,7 @@ public:
 	// main-update loop;
 	void OnUpdate(Engine::Timestep ts) override {
 
-		LOG_INFO("DELTA TIME: {0}s ({1} ms)", ts.GetSeconds(), ts.GetMilliseconds());
+	// LOG_INFO("DELTA TIME: {0}s ({1} ms)", ts.GetSeconds(), ts.GetMilliseconds());
 	// 	float time = ts;
 
 		if (Engine::Input::IsKeyPressed( EG_KEY_LEFT))
@@ -171,18 +173,30 @@ public:
 		
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		for (int y = 0; y < 20; y++) {
+		
+		static glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
+		static glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
 
-			for (int x = 0; x < 20; x++) {
+	
+		for (int y = 0; y < 10; y++) {
+
+			for (int x = 0; x < 10; x++) {
 
 				glm::vec3 pos(x * 0.11f, y*0.11f, 0.0f);
 				glm::mat4 transfrom = glm::translate(glm::mat4(1.0f), pos) * scale;
+				if (x % 2 == 0) {
+					m_BlueShader->UploadUniformFloat4("u_Color", redColor);
+				}
+				else {
+					m_BlueShader->UploadUniformFloat4("u_Color", blueColor);
+				}
 				Engine::Renderer::Submit(m_BlueShader, m_SquareVA, transfrom);
-			}
-	
-		}
 
-		Engine::Renderer::Submit(m_Shader, m_VertexArray);
+
+			}
+		}
+				Engine::Renderer::Submit(m_Shader, m_VertexArray);
+
 
 		Engine::Renderer::EndScene();
 
