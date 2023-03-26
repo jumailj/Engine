@@ -4,6 +4,14 @@
 #include "glad/glad.h"
 
 namespace Engine {
+
+	void OpenGLRendererAPI::Init() 
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+
 	void OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 	{
 		glClearColor(color.r, color.g, color.b, color.a);

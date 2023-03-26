@@ -168,7 +168,7 @@ public:
 		m_TextureShader.reset(Engine::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 		
 		
-		m_Texture = (Engine::Texture2D::Create("assets/textures/Checkerboard.png"));
+		m_Texture = (Engine::Texture2D::Create("assets/textures/Checkerboard1.png"));
 
 
 		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_TextureShader)->Bind();
