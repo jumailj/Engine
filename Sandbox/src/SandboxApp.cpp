@@ -157,16 +157,22 @@ public:
 
 			in vec2 v_TexCoord;
 
-			uniform vec3 u_Color;
+			uniform sampler2D u_Texture;
 
 			void main()
 			{
-				color = vec4(v_TexCoord,0.0, 1.0);
+				color = texture(u_Texture,v_TexCoord);
 			}
 		)";
 
 		m_TextureShader.reset(Engine::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		
+		
+		m_Texture = (Engine::Texture2D::Create("assets/textures/Checkerboard.png"));
 
+
+		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 
 	}
 	// main-update loop;
@@ -226,7 +232,7 @@ public:
 			}
 		}
 
-
+		m_Texture->Bind();
 		Engine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); 
 		
 		// triangel;
@@ -259,6 +265,10 @@ private:
 	Engine::Ref<Engine::Shader> m_BlueShader, m_TextureShader;
 	Engine::Ref<Engine::VertexArray> m_SquareVA;
 
+	Engine::Ref<Engine::Texture2D> m_Texture;
+
+
+
 	Engine::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
 
@@ -266,7 +276,6 @@ private:
 	float m_CameraSpeed = 1.0f;
 
 	glm::vec3 m_SqureColor = { 0.2f, 0.3f, 0.8f };
-
 
 };
 

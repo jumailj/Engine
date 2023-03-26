@@ -14,6 +14,7 @@ workspace "Engine"
 	IncludeDir["Glad"]  = "Engine/vendor/Glad/include"
 	IncludeDir["ImGui"] = "Engine/vendor/imgui"
 	IncludeDir["glm"] =   "Engine/vendor/glm"
+	IncludeDir["stb_image"] = "Engine/vendor/stb_image"
 
 	--include the glfw premake files
 	include "Engine/vendor/GLFW"
@@ -36,9 +37,9 @@ project "Engine"
 	pchsource "Engine/src/EnginePCH.cpp" --for vs
 
 
-	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp", "%{prj.name}/vendor/glm/glm/**.hpp", "%{prj.name}/vendor/glm/glm/**.ini"}
+	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp","%{prj.name}/vendor/stb_image/**.cpp" ,"%{prj.name}/vendor/stb_image/**.h",  "%{prj.name}/vendor/glm/glm/**.hpp", "%{prj.name}/vendor/glm/glm/**.ini"}
 
-	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}","%{IncludeDir.ImGui}", "%{IncludeDir.glm}"}
+	includedirs {"%{prj.name}/src", "%{prj.name}/vendor/spdlog/include", "%{IncludeDir.GLFW}", "%{IncludeDir.Glad}","%{IncludeDir.ImGui}", "%{IncludeDir.glm}", "%{IncludeDir.stb_image}"}
 
 	links { "GLFW","Glad","ImGui", "opengl32.lib"}
 									  
