@@ -1,9 +1,10 @@
 #include <Engine.h>
 #include "imgui/imgui.h"
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
+#include "Platform/OpenGL/OpenGLShader.h"
 
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 class ExampleLayer : public Engine::Layer {
 public:
@@ -11,8 +12,7 @@ public:
 		:Layer("Example"), 
 		m_Camera( - 1.6f, 1.6f, -0.9f, 0.9f),
 		m_CameraPosition(0.0f), 
-		m_CameraRotation{0.0f}, 
-		m_SqurePosition{ 0.0f }
+		m_CameraRotation{0.0f}
 	{
 
 		m_VertexArray.reset(Engine::VertexArray::Create());
@@ -93,7 +93,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(new Engine::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(Engine::Shader::Create(vertexSrc, fragmentSrc));
 
 		std::string blueShaderVertexSrc = R"(
 			#version 330 core
@@ -119,15 +119,15 @@ public:
 
 			in vec3 v_Position;
 
-			uniform vec4 u_Color;
+			uniform vec3 u_Color;
 
 			void main()
 			{
-				color = u_Color;
+				color = vec4(u_Color, 1.0);
 			}
 		)";
 
-		m_BlueShader.reset(new Engine::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_BlueShader.reset(Engine::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
 
 	}
 	// main-update loop;
@@ -173,25 +173,16 @@ public:
 		
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		
-		static glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
-		static glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+		std::static_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->Bind();
+		std::static_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->UploadUniformFloat3("u_Color", m_SqureColor);
 
-	
 		for (int y = 0; y < 10; y++) {
 
 			for (int x = 0; x < 10; x++) {
 
 				glm::vec3 pos(x * 0.11f, y*0.11f, 0.0f);
 				glm::mat4 transfrom = glm::translate(glm::mat4(1.0f), pos) * scale;
-				if (x % 2 == 0) {
-					m_BlueShader->UploadUniformFloat4("u_Color", redColor);
-				}
-				else {
-					m_BlueShader->UploadUniformFloat4("u_Color", blueColor);
-				}
 				Engine::Renderer::Submit(m_BlueShader, m_SquareVA, transfrom);
-
 
 			}
 		}
@@ -204,6 +195,10 @@ public:
 
 	// gui-graphics;
 	virtual void OnImGuiRender() override {
+
+		ImGui::Begin("settigns");
+		ImGui::ColorEdit3("square color:", glm::value_ptr(m_SqureColor));
+		ImGui::End();
 
 	}
 
@@ -226,7 +221,7 @@ private:
 	float m_CameraRotation = 0.0f;
 	float m_CameraSpeed = 1.0f;
 
-	glm::vec3 m_SqurePosition;
+	glm::vec3 m_SqureColor = { 0.2f, 0.3f, 0.8f };
 
 
 };
