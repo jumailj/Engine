@@ -6,6 +6,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
+
 class ExampleLayer : public Engine::Layer {
 public:
 	ExampleLayer()
@@ -94,7 +95,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Engine::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = (Engine::Shader::Create("vertexPosColor", vertexSrc, fragmentSrc));
 
 		std::string blueShaderVertexSrc = R"(
 			#version 330 core
@@ -128,21 +129,21 @@ public:
 			}
 		)";
 
-		m_BlueShader.reset(Engine::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_BlueShader = (Engine::Shader::Create("flatColor", blueShaderVertexSrc, blueShaderFragmentSrc));
 
 		// texture;
 
 
-
-
-		m_TextureShader.reset(Engine::Shader::Create("assets/shaders/Texture.glsl"));
+		auto textureShader = m_shaderLibrary.Load("assets/shaders/Texture.glsl");
 		
 		
 		m_Texture = (Engine::Texture2D::Create("assets/textures/Checkerboard1.png"));
 
 
-		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		
+
+		std::dynamic_pointer_cast <Engine::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast <Engine::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 
 	}
 	// main-update loop;
@@ -191,9 +192,9 @@ public:
 		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->Bind();
 		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->UploadUniformFloat3("u_Color", m_SqureColor);
 
-		for (int y = 0; y < 10; y++) {
+		for (int y = 0; y < 15; y++) {
 
-			for (int x = 0; x < 10; x++) {
+			for (int x = 0; x < 30; x++) {
 
 				glm::vec3 pos(x * 0.13f, y*0.13f, 0.0f);
 				glm::mat4 transfrom = glm::translate(glm::mat4(1.0f), pos) * scale;
@@ -202,8 +203,10 @@ public:
 			}
 		}
 
+		auto textureShader = m_shaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
-		Engine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f))); 
+		Engine::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
 		
 		// triangel;
 		// 	Engine::Renderer::Submit(m_Shader, m_VertexArray);
@@ -229,10 +232,12 @@ public:
 
 
 private:
+	Engine::ShaderLibrary m_shaderLibrary;
+
 	Engine::Ref<Engine::Shader> m_Shader;
 	Engine::Ref<Engine::VertexArray> m_VertexArray;
 
-	Engine::Ref<Engine::Shader> m_BlueShader, m_TextureShader;
+	Engine::Ref<Engine::Shader> m_BlueShader;
 	Engine::Ref<Engine::VertexArray> m_SquareVA;
 
 	Engine::Ref<Engine::Texture2D> m_Texture;
