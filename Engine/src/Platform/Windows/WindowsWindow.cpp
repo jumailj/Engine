@@ -74,6 +74,7 @@ namespace Engine {
 				data.Height = height;
 
 				WindowResizeEvent event(width, height);
+				LOG_CORE_INFO ("window resized");
 				data.EventCallback(event);	
 
 		});

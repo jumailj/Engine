@@ -11,6 +11,11 @@ namespace Engine {
 			s_RendererAPI->Init();
 		}
 
+		inline static void SetViewport(uint32_t x, uint32_t y, uint32_t widht, uint32_t height)
+		{
+			s_RendererAPI->SetViewport(x, y, widht, height);
+		}
+
 
 
 		inline static void SetClearColor(const glm::vec4& color)

@@ -10,7 +10,7 @@
 class ExampleLayer : public Engine::Layer {
 public:
 	ExampleLayer()
-		:Layer("Example"), m_CameraController(1280.0f / 720.0f)
+		:Layer("Example"), m_CameraController(1280.0f / 720.0f, false)
 	{
 
 		m_VertexArray.reset(Engine::VertexArray::Create());
@@ -129,8 +129,6 @@ public:
 		m_BlueShader = (Engine::Shader::Create("flatColor", blueShaderVertexSrc, blueShaderFragmentSrc));
 
 		// texture;
-
-
 		auto textureShader = m_shaderLibrary.Load("assets/shaders/Texture.glsl");
 
 
@@ -199,6 +197,15 @@ public:
 	void OnEvent(Engine::Event& e) override
 	{
 		m_CameraController.OnEvent(e);
+
+		if (e.GetEventType() == Engine::EventType::WindowResize) 
+		{
+			auto& re = (Engine::WindowResizeEvent&)e;
+
+			//float zoom = (float)re.GetWidth() / 1280.0f;
+			//m_CameraController.SetZoomLevel(zoom);
+
+		}
 	}
 
 
