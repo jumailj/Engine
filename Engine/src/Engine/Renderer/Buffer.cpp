@@ -13,7 +13,7 @@ namespace Engine {
 		case RendererAPI::API::OpenGL: return new OpenGLVertexBuffer(vertices, size);
 		}
 
-		ENGINE_CORE_ASSERT(false, "unknown renderere API!");
+		ENGINE_CORE_ASSERT(false, "unknown renderere API! ");
 		return nullptr;
 	}
 

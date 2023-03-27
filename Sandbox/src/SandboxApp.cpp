@@ -40,7 +40,7 @@ public:
 		m_SquareVA.reset(Engine::VertexArray::Create());
 
 		float squareVertices[5 * 4] = {
-			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			-0.5f, -0.5f, 0.0f, 0.0f, .0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
 			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
@@ -130,42 +130,12 @@ public:
 
 		m_BlueShader.reset(Engine::Shader::Create(blueShaderVertexSrc, blueShaderFragmentSrc));
 
+		// texture;
 
 
-		std::string textureShaderVertexSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
 
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
 
-			out vec2 v_TexCoord;
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
-			}
-		)";
-
-		std::string textureShaderFragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-
-			in vec2 v_TexCoord;
-
-			uniform sampler2D u_Texture;
-
-			void main()
-			{
-				color = texture(u_Texture,v_TexCoord);
-			}
-		)";
-
-		m_TextureShader.reset(Engine::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		m_TextureShader.reset(Engine::Shader::Create("assets/shaders/Texture.glsl"));
 		
 		
 		m_Texture = (Engine::Texture2D::Create("assets/textures/Checkerboard1.png"));
@@ -216,7 +186,7 @@ public:
 		Engine::Renderer::BeginScene(m_Camera);
 
 		
-		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f));
 
 		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->Bind();
 		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->UploadUniformFloat3("u_Color", m_SqureColor);
@@ -233,7 +203,7 @@ public:
 		}
 
 		m_Texture->Bind();
-		Engine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); 
+		Engine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f))); 
 		
 		// triangel;
 		// 	Engine::Renderer::Submit(m_Shader, m_VertexArray);
