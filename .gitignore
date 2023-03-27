@@ -3,6 +3,7 @@
 *.sln
 *.idb
 
+
 #folders
 /bin
 /bin-int
