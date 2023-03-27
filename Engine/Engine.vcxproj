@@ -465,6 +465,7 @@
     <ClCompile Include="src\Engine\Layer.cpp" />
     <ClCompile Include="src\Engine\LayerStack.cpp" />
     <ClCompile Include="src\Engine\Log.cpp" />
+    <ClCompile Include="src\Engine\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Engine\Renderer\Buffer.cpp" />
     <ClCompile Include="src\Engine\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Engine\Renderer\RenderCommands.cpp" />
@@ -476,7 +477,6 @@
     <ClCompile Include="src\EnginePCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Engine\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
