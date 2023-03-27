@@ -2,8 +2,8 @@
 
 #include "OrthographicCameraController.h"
 
-#include "Engine/Input.h"
-#include "Engine/KeyCodes.h"
+#include "Engine/Core/Input.h"
+#include "Engine/Core/KeyCodes.h"
 
 namespace Engine {
 

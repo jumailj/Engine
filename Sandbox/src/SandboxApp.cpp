@@ -10,7 +10,7 @@
 class ExampleLayer : public Engine::Layer {
 public:
 	ExampleLayer()
-		:Layer("Example"), m_CameraController(1280.0f / 720.0f, false)
+		:Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
 	{
 
 		m_VertexArray.reset(Engine::VertexArray::Create());
@@ -187,6 +187,7 @@ public:
 	// gui-graphics;
 	virtual void OnImGuiRender() override {
 
+		ImGui::SetNextWindowBgAlpha(0.80f);
 		ImGui::Begin("settigns");
 		ImGui::ColorEdit3("square color:", glm::value_ptr(m_SqureColor));
 		ImGui::End();
