@@ -31,5 +31,5 @@
 
 
 //----------Entry point........"
-#include <Engine/Core/EntryPoint.h>
+// #include <Engine/Core/EntryPoint.h>
 

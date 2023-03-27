@@ -1,10 +1,14 @@
 #include <Engine.h>
 #include "imgui/imgui.h"
 
+#include "Engine/Core/EntryPoint.h"
+
 #include "Platform/OpenGL/OpenGLShader.h"
 
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+
+#include "Sandbox2D.h"
 
 
 class ExampleLayer : public Engine::Layer {
@@ -13,7 +17,7 @@ public:
 		:Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
 	{
 
-		m_VertexArray.reset(Engine::VertexArray::Create());
+		m_VertexArray =  Engine::VertexArray::Create();
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -35,7 +39,7 @@ public:
 		indexBuffer.reset(Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		m_SquareVA.reset(Engine::VertexArray::Create());
+		m_SquareVA = (Engine::VertexArray::Create());
 
 		float squareVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f, 0.0f, .0f,
@@ -155,7 +159,7 @@ public:
 		Engine::Renderer::BeginScene(m_CameraController.GetCamera());
 
 
-		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.05f));
+		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.08f));
 
 		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->Bind();
 		std::dynamic_pointer_cast <Engine::OpenGLShader>(m_BlueShader)->UploadUniformFloat3("u_Color", m_SqureColor);
@@ -164,7 +168,7 @@ public:
 
 			for (int x = 0; x < 30; x++) {
 
-				glm::vec3 pos(x * 0.13f, y * 0.13f, 0.0f);
+				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transfrom = glm::translate(glm::mat4(1.0f), pos) * scale;
 				Engine::Renderer::Submit(m_BlueShader, m_SquareVA, transfrom);
 
@@ -232,8 +236,10 @@ class Sandbox : public Engine::Application {
 public:
 	Sandbox() {
 
-		PushLayer(new ExampleLayer()); //EVENTS
-		// no-more PushOverlay(new Engine::ImGuiLayer()); //IMGUI
+		// PushLayer(new ExampleLayer()); //EVENTS
+
+		PushLayer(new Sandbox2D() );
+		
 	}
 
 	~Sandbox() {

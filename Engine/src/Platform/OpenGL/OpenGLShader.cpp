@@ -159,8 +159,13 @@ namespace Engine {
 			return;
 		}
 
-		for (auto id : glShaderIDs)
+		for (auto id : glShaderIDs) {
+
 			glDetachShader(program, id);
+			glDeleteShader(id); // delte sahder after compiling.
+
+		}
+
 	}
 
 	void OpenGLShader::Bind() const
