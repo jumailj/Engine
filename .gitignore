@@ -2,6 +2,7 @@
 *.vs
 *.sln
 *.idb
+*.json
 
 **.lib
 **.pdb
