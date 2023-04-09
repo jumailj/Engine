@@ -60,7 +60,8 @@ void Sandbox2D::OnUpdate(Engine::Timestep ts)
 		}
 
 		Engine::Renderer2D::DrawQuad(pos, scl, color);
-		Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.8f }, { 10.0f, 10.0f }, m_CheckerboardTexture);
+		Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.8f }, { 10.0f, 10.0f }, m_CheckerboardTexture, 3.0f);
+		Engine::Renderer2D::DrawRotatedQuad({ 0.0f, 0.0f, -0.1f }, { 3.0f, 3.0f }, glm::radians(squareRotation), {1.2f, 0.3f, 0.4f, 1.0f});
 		Engine::Renderer2D::EndScene();
 
 	}
@@ -69,9 +70,11 @@ void Sandbox2D::OnUpdate(Engine::Timestep ts)
 
 	if (Engine::Input::IsKeyPressed(EG_KEY_UP)) {
 		pos.y += 1.2f * ts;
+		squareRotation += 7.0 * ts;
 	}
 	else if (Engine::Input::IsKeyPressed(EG_KEY_DOWN)) {
 		pos.y -= 1.2f * ts;
+		squareRotation -= 7.0 * ts;
 	}
 
 	if (Engine::Input::IsKeyPressed(EG_KEY_RIGHT)) {
@@ -99,8 +102,6 @@ void Sandbox2D::OnImGuiRender()
 
  	ImGui::Begin("Settings");
  	ImGui::ColorEdit4("Square Color", glm::value_ptr(color));
-
-
 
  	ImGui::End();
 }

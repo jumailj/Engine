@@ -30,5 +30,6 @@ private:
 	glm::vec2 pos = { 0.0f, 0.0f };
 	glm::vec2 scl = { 1.0f, 1.0f };
 
+	float squareRotation = 0.0f;
 
 };

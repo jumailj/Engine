@@ -141,7 +141,7 @@ namespace Engine {
 
 }
 
-#define ENGINE_PROFILE 1
+#define ENGINE_PROFILE 0 // 1 for enable debug profiling.
 #if ENGINE_PROFILE
 #define ENGINE_PROFILE_BEGIN_SESSION(name, filepath) ::Engine::Instrumentor::Get().BeginSession(name, filepath)
 #define ENGINE_PROFILE_END_SESSION() ::Engine::Instrumentor::Get().EndSession()
