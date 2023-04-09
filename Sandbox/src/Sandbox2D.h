@@ -30,13 +30,5 @@ private:
 	glm::vec2 pos = { 0.0f, 0.0f };
 	glm::vec2 scl = { 1.0f, 1.0f };
 
-	struct ProfileResult
-	{
-		const char* Name;
-		float Time;
-	};
-
-	std::vector<ProfileResult> m_ProfileResults;
-
 
 };

@@ -9,12 +9,18 @@ int main(int argc, char *argv[])
 {
 	Engine::Log::Init();
 	LOG_CORE_INFO("DIR: {0}", argv[0]);
-	LOG_CORE_INFO("Welcome To Engine");
-	LOG_INFO("Welcome to SandBox");
 
+	ENGINE_PROFILE_BEGIN_SESSION("STARTUP", "ENGINEPROFILE-STARUP.json");
 	Engine::Application *app = Engine::CreateApplication();
+	ENGINE_PROFILE_END_SESSION();
+
+	ENGINE_PROFILE_BEGIN_SESSION("RUNTIME", "ENGINEPROFILE-RUNTIME.json");
 	app->Run();
+	ENGINE_PROFILE_END_SESSION();
+
+	ENGINE_PROFILE_BEGIN_SESSION("SHUTDOWN", "ENGINEPROFILE-SHUTDOWN.json");
 	delete app;
+	ENGINE_PROFILE_END_SESSION();
 }
 
 #endif
