@@ -17,12 +17,15 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+	ENGINE_PROFILE_FUNCTION();
+
 	m_CheckerboardTexture  = (Engine::Texture2D::Create("assets/textures/Checkerboard.png"));
 	m_CheckerboardTexture1 = (Engine::Texture2D::Create("assets/textures/Checkerboard1.png"));
 }
 
 void Sandbox2D::OnDetach()
 {
+	ENGINE_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(Engine::Timestep ts)
@@ -31,42 +34,38 @@ void Sandbox2D::OnUpdate(Engine::Timestep ts)
 
 
 	// Update
-	{
-		ENGINE_PROFILE_SCOPE("CAMERA CONTROLLER:: ONUPDATE");
-		m_CameraController.OnUpdate(ts);
-	}
-
-
+	m_CameraController.OnUpdate(ts);
+	
 
 	// Render
 	{
-		ENGINE_PROFILE_SCOPE("RENDER: PREP");
+		ENGINE_PROFILE_SCOPE("RENDER: Prep");
 		Engine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Engine::RenderCommand::Clear();
-
 	}
 
 
+	{
+		ENGINE_PROFILE_SCOPE("RENDER: Draw");
 
-	Engine::Renderer2D::BeginScene(m_CameraController.GetCamera());
+		Engine::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
+		for (int y = 0; y < 3; y++) {
 
+			for (int x = 0; x < 3; x++) {
 
-	for (int y = 0; y < 3; y++) {
+				Engine::Renderer2D::DrawQuad({ 0.4f * x, -0.4f * y }, { 0.3f, 0.3f }, { 1.7f, 0.5f, 0.3f, 1.0f });
 
-		for (int x = 0; x < 3; x++) {
-
-			Engine::Renderer2D::DrawQuad({ 0.4f * x, -0.4f * y }, { 0.3f, 0.3f }, { 1.7f, 0.5f, 0.3f, 1.0f });
-
+			}
 		}
+
+		Engine::Renderer2D::DrawQuad(pos, scl, color);
+		Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.8f }, { 10.0f, 10.0f }, m_CheckerboardTexture);
+		Engine::Renderer2D::EndScene();
+
 	}
 
-	Engine::Renderer2D::DrawQuad(pos,scl,color);
-	Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.8f }, { 10.0f, 10.0f }, m_CheckerboardTexture);
-
-
-
-	Engine::Renderer2D::EndScene();
+	//INPUT CONTROLLER;
 
 	if (Engine::Input::IsKeyPressed(EG_KEY_UP)) {
 		pos.y += 1.2f * ts;
