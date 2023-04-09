@@ -24,12 +24,17 @@ namespace Engine {
 		else if (Input::IsKeyPressed(EG_KEY_S))
 			m_CameraPosition.y -= m_CameraTranslationSpeed * ts;
 
+
 		if (m_Rotation)
 		{
-			if (Input::IsKeyPressed(EG_KEY_Q))
+			if (Input::IsKeyPressed(EG_KEY_Q)) {
 				m_CameraRotation += m_CameraRotationSpeed * ts;
-			if (Input::IsKeyPressed(EG_KEY_E))
+			}
+				
+			if (Input::IsKeyPressed(EG_KEY_E)) {
 				m_CameraRotation -= m_CameraRotationSpeed * ts;
+				LOG_CORE_INFO("CAMERA ROTATION: {0}", m_CameraRotation);
+			}
 
 			m_Camera.SetRotation(m_CameraRotation);
 		}
@@ -37,6 +42,11 @@ namespace Engine {
 		m_Camera.SetPosition(m_CameraPosition);
 
 		m_CameraTranslationSpeed = m_ZoomLevel;
+
+
+		// mouse pan controller
+
+
 	}
 
 	void OrthographicCameraController::OnEvent(Event& e)

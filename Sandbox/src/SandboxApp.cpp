@@ -239,9 +239,7 @@ public:
 	Sandbox() {
 
 			PushLayer(new Sandbox2D());
-		//  PushLayer(new ExampleLayer()); //EVENTS
-
-
+		// PushLayer(new ExampleLayer()); //EVENTS
 	}
 
 	~Sandbox() {

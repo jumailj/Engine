@@ -92,10 +92,11 @@ namespace Engine
 		}
 	}
 
-	void ImGuiLayer::OnImGuiRender()
+	//demo window;
+	/*void ImGuiLayer::OnImGuiRender()
 	{
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);
-	}
+	}*/
 
 }
