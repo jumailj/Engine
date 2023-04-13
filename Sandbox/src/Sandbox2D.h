@@ -23,5 +23,7 @@ private:
 
 	Engine::Ref<Engine::Texture2D> m_CheckerboardTexture;
 
+	Engine::Ref<Engine::Texture2D> m_SprietsheetTexture;
+
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
