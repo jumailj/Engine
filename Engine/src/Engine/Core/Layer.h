@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Timestep.h"
-#include "Engine/Core.h"
+#include "Engine/Core/Timestep.h"
+#include "Engine/Core/Core.h"
 #include "Engine/Events/Event.h"
 
 

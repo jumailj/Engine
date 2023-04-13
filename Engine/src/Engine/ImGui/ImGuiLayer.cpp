@@ -7,7 +7,7 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 
-#include "Engine/Application.h"
+#include "Engine/Core/Application.h"
 
 //temporary;
 
@@ -28,6 +28,8 @@ namespace Engine
 
 	void ImGuiLayer::OnAttach()
 	{
+		ENGINE_PROFILE_FUNCTION();
+
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -61,6 +63,8 @@ namespace Engine
 
 	void ImGuiLayer::OnDetach()
 	{
+		ENGINE_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -68,6 +72,8 @@ namespace Engine
 
 	void ImGuiLayer::Begin()
 	{
+		ENGINE_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -75,6 +81,8 @@ namespace Engine
 
 	void ImGuiLayer::End()
 	{
+		ENGINE_PROFILE_FUNCTION();
+
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
 		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
@@ -92,10 +100,11 @@ namespace Engine
 		}
 	}
 
-	void ImGuiLayer::OnImGuiRender()
+	//demo window;
+	/*void ImGuiLayer::OnImGuiRender()
 	{
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);
-	}
+	}*/
 
 }

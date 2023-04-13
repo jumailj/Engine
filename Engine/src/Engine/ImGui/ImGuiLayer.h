@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine/Layer.h"
+#include "Engine/Core/Layer.h"
 
 #include <Engine/Events/ApplicationEvent.h>
 #include <Engine/Events/KeyEvent.h>
@@ -17,7 +17,7 @@ namespace Engine {
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
-		virtual void OnImGuiRender() override;
+	//	virtual void OnImGuiRender() override;
 
 		void Begin();
 		void End();

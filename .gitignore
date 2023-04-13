@@ -2,9 +2,15 @@
 *.vs
 *.sln
 *.idb
+*.json
+
+**.lib
+**.pdb
+**.tlog
 
 
 #folders
 /bin
 /bin-int
-/Engine/vendor/Glad/bin/
+*/Engine/vendor/Glad/bin/
+

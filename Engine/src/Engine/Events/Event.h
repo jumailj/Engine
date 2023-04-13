@@ -1,7 +1,7 @@
 #pragma once
 #include <EnginePCH.h>
 
-#include <Engine/Core.h>
+#include <Engine/Core/Core.h>
 #include <spdlog/fmt/ostr.h> // ostream(operator overloading spdlog)
 
 namespace Engine {
