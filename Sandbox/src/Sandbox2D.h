@@ -22,14 +22,6 @@ private:
 	Engine::Ref<Engine::Shader> m_FlatColorShader;
 
 	Engine::Ref<Engine::Texture2D> m_CheckerboardTexture;
-	Engine::Ref<Engine::Texture2D> m_CheckerboardTexture1;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
-	glm::vec4 color = { 0.7f, 0.5f, 1.3f, 1.0f };
-
-	glm::vec2 pos = { 0.0f, 0.0f };
-	glm::vec2 scl = { 1.0f, 1.0f };
-
-	float squareRotation = 0.0f;
-
 };
