@@ -36,7 +36,7 @@ namespace Engine {
 		{
 
 			ENGINE_PROFILE_SCOPE("stbi_load - OpenGL Texture2D:: OpenGLTexture2D(const std::string&)");
-			data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+			data = stbi_load(path.c_str(), &width, &height, &channels, 0); // return widh, height, channel values from image;
 		}
 
 		ENGINE_CORE_ASSERT(data, "Failed to load image!");

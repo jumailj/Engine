@@ -16,6 +16,8 @@ void Sandbox2D::OnAttach()
 
 	m_CheckerboardTexture = Engine::Texture2D::Create("assets/textures/Checkerboard.png");
  	m_SprietsheetTexture = Engine::Texture2D::Create("assets/textures/sprite-sheet.png");
+
+	m_TextureStairs = Engine::SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 2,1 }, { 128, 128 }, {1,2});
 }
 
 void Sandbox2D::OnDetach()
@@ -51,12 +53,11 @@ void Sandbox2D::OnUpdate(Engine::Timestep ts)
 		// Engine::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
 		// Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture, 10.0f);
 		// Engine::Renderer2D::DrawRotatedQuad({ -2.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, roation, m_CheckerboardTexture, 20.0f);
-		
-		
-		Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, m_SprietsheetTexture);
-		
-		
-		
+
+
+		Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f,   0.0f }, { 1.0f, 2.0f }, m_TextureStairs);
+
+		m_SprietsheetTexture;
 		
 		Engine::Renderer2D::EndScene();
 	}
