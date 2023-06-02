@@ -22,9 +22,6 @@
     <Filter Include="src\Engine\Renderer">
       <UniqueIdentifier>{F838018B-649A-DE98-ED07-254B59681558}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Engine\Scripting">
-      <UniqueIdentifier>{94147CC7-80A3-0591-29C2-198C15301637}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
     </Filter>
@@ -117,6 +114,9 @@
     <ClInclude Include="src\Engine\Renderer\Buffer.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Renderer\FrameBuffer.h">
+      <Filter>src\Engine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\Renderer\GraphicsContext.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
@@ -169,6 +169,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGlFrameBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsInput.h">
@@ -1034,6 +1037,9 @@
     <ClCompile Include="src\Engine\Renderer\Buffer.cpp">
       <Filter>src\Engine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Renderer\FrameBuffer.cpp">
+      <Filter>src\Engine\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Engine\Renderer\OrthographicCamera.cpp">
       <Filter>src\Engine\Renderer</Filter>
     </ClCompile>
@@ -1071,6 +1077,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">

@@ -32,11 +32,16 @@ void Sandbox2D::OnAttach()
 	m_TextureStairs = Engine::SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 1,11 }, { 128, 128 }, {1,1});
 
 	m_MapWidth = s_MapWidth;
-	m_MapHeight = strlen(s_MapTiles)/ s_MapWidth;
-	
+	m_MapHeight = strlen(s_MapTiles)/ s_MapWidth;	
 
 	s_TextureMap['D'] = Engine::SubTexture2D::CreateFromCoords(m_SprietsheetTexture, {6,11}, {128, 128}, {1,1});
 	s_TextureMap['W'] = Engine::SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 11,11 }, { 128, 128 }, { 1,1 });
+
+
+	Engine::FrameBufferSpecification fbSpec;
+	fbSpec.Width = 1280;
+	fbSpec.Height = 720;
+	m_FramberBuffer = Engine::FrameBuffer::Create(fbSpec);
 
 
 
@@ -60,6 +65,10 @@ void Sandbox2D::OnUpdate(Engine::Timestep ts)
 	Engine::Renderer2D::ResetStats();
 	{
 		ENGINE_PROFILE_SCOPE("Renderer Prep");
+
+		m_FramberBuffer->Bind();
+
+
 		Engine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Engine::RenderCommand::Clear();
 	}
@@ -126,6 +135,7 @@ void Sandbox2D::OnUpdate(Engine::Timestep ts)
 		
 		
 		Engine::Renderer2D::EndScene();
+		m_FramberBuffer->Unbind();
 	}
 }
 
@@ -230,8 +240,9 @@ void Sandbox2D::OnImGuiRender()
 
 
 	// viewport texture;
-	uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-	ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+	uint32_t textureID = m_FramberBuffer->GetColorAttachmentRendererID();
+	//uint32_t textureID = m_CheckerboardTexture->GetRendererID();
+	ImGui::Image((void*)textureID, ImVec2{ 1280.0f, 720.0f });
 
 
 
