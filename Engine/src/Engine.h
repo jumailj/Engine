@@ -24,6 +24,7 @@
 #include "Engine/Renderer/Buffer.h"
 #include "Engine/Renderer/Shader.h"
 #include "Engine/Renderer/Texture.h"
+#include "Engine/Renderer/SubTexture2D.h"
 #include "Engine/Renderer/VertexArray.h"
 
 
@@ -33,4 +34,3 @@
 
 //----------Entry point........"
 // #include <Engine/Core/EntryPoint.h>
-

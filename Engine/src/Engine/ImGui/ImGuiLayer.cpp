@@ -9,6 +9,7 @@
 
 #include "Engine/Core/Application.h"
 
+
 //temporary;
 
 #include "GLFW/glfw3.h"
@@ -101,10 +102,10 @@ namespace Engine
 	}
 
 	//demo window;
-	/*void ImGuiLayer::OnImGuiRender()
-	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-	}*/
+	// void ImGuiLayer::OnImGuiRender()
+	// {
+	// 	static bool show = true;
+	// 	ImGui::ShowDemoWindow(&show);
+	// }
 
 }
