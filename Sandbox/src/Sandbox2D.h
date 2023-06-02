@@ -2,6 +2,7 @@
 
 #include "Engine.h"
 
+
 class Sandbox2D : public Engine::Layer
 {
 public:
@@ -23,8 +24,15 @@ private:
 
 	Engine::Ref<Engine::Texture2D> m_CheckerboardTexture;
 	Engine::Ref<Engine::Texture2D> m_SprietsheetTexture;
+	Engine::Ref<Engine::Texture2D> m_CheckerboardTexture1;
 
 	Engine::Ref<Engine::SubTexture2D> m_TextureStairs;
+	Engine::Ref<Engine::SubTexture2D> m_TextrueGrass1;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
+
+
+	uint32_t m_MapWidth, m_MapHeight;
+	std::unordered_map<char, Engine::Ref<Engine::SubTexture2D>> s_TextureMap;
+
 };
