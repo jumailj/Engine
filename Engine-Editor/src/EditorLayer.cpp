@@ -59,6 +59,17 @@ namespace Engine {
 	{
 		ENGINE_PROFILE_FUNCTION();
 
+
+		// Resize
+		if (Engine::FrameBufferSpecification spec = m_FrambeBuffer->GetSpecification();
+			m_ViewPortSize.x > 0.0f && m_ViewPortSize.y > 0.0f && // zero sized framebuffer is invalid
+			(spec.Width != m_ViewPortSize.x || spec.Height != m_ViewPortSize.y))
+		{
+			m_FrambeBuffer->Resize((uint32_t)m_ViewPortSize.x, (uint32_t)m_ViewPortSize.y);
+			m_CameraController.OnResize(m_ViewPortSize.x, m_ViewPortSize.y);
+		}
+
+
 		// Update
 		if (m_ViewportFocused)
 			m_CameraController.OnUpdate(ts);
@@ -232,6 +243,9 @@ namespace Engine {
 
 
 		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+		m_ViewPortSize = { viewportPanelSize.x, viewportPanelSize.y }; // remove flickring
+
+
 		if (m_ViewPortSize != *((glm::vec2*)&viewportPanelSize))
 		{
 			m_FrambeBuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
