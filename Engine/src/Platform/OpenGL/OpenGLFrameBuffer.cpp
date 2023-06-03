@@ -5,6 +5,8 @@
 
 namespace Engine {
 
+	const uint32_t sMaxFrameBufferSize = 8120;
+
 	OpenGLFramebuffer::OpenGLFramebuffer(const FrameBufferSpecification& spec)
 		: m_Specification(spec)
 	{
@@ -66,11 +68,18 @@ namespace Engine {
 
 	void OpenGLFramebuffer::Resize(uint32_t width, uint32_t height)
 	{
+		if (width == 0 || height == 0 || width > sMaxFrameBufferSize || height > sMaxFrameBufferSize) {
+			LOG_CORE_ERROR("attempt to rezies framebuffer to {0}, {1}", width, height);
+			return;
+		}
+
+
 		m_Specification.Width = width;
 		m_Specification.Height = height;
 
-		Invalidate();
+		LOG_CORE_INFO("WINDOW RESIZED: {0}, {1}", width, height);
 
+		Invalidate();
 	}
 
 }

@@ -45,8 +45,6 @@ namespace Engine {
 		m_FrambeBuffer = Engine::FrameBuffer::Create(fbSpec);
 
 
-
-
 		m_CameraController.SetZoomLevel(5.0f);
 	}
 
@@ -246,7 +244,7 @@ namespace Engine {
 		m_ViewPortSize = { viewportPanelSize.x, viewportPanelSize.y }; // remove flickring
 
 
-		if (m_ViewPortSize != *((glm::vec2*)&viewportPanelSize))
+		if (m_ViewPortSize != *((glm::vec2*)&viewportPanelSize) && viewportPanelSize.x > 0 && viewportPanelSize.y > 0)
 		{
 			m_FrambeBuffer->Resize((uint32_t)viewportPanelSize.x, (uint32_t)viewportPanelSize.y);
 			m_ViewPortSize = { viewportPanelSize.x, viewportPanelSize.y };
