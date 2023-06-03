@@ -157,6 +157,7 @@
     <ClInclude Include="src\Engine\Core\LayerStack.h" />
     <ClInclude Include="src\Engine\Core\Log.h" />
     <ClInclude Include="src\Engine\Core\MouseButtonCodes.h" />
+    <ClInclude Include="src\Engine\Core\MouseCodes.h" />
     <ClInclude Include="src\Engine\Core\Timestep.h" />
     <ClInclude Include="src\Engine\Core\Window.h" />
     <ClInclude Include="src\Engine\Debug\Instrumentor.h" />
@@ -186,7 +187,6 @@
     <ClInclude Include="src\Platform\OpenGL\OpenGLTexture.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGlFrameBuffer.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />

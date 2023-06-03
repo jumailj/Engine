@@ -87,6 +87,9 @@
     <ClInclude Include="src\Engine\Core\MouseButtonCodes.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Core\MouseCodes.h">
+      <Filter>src\Engine\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\Core\Timestep.h">
       <Filter>src\Engine\Core</Filter>
     </ClInclude>
@@ -173,9 +176,6 @@
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGlFrameBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
-      <Filter>src\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>src\Platform\Windows</Filter>

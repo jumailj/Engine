@@ -16,8 +16,6 @@ namespace Engine {
 		"WWWWWWWWDDDDDWWWWWWWWWWW"
 		"WWWWWWWWWWWWWWWWWWWWWWWW";
 
-	
-
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f, true)
 	{
