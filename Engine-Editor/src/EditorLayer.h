@@ -37,7 +37,8 @@ namespace Engine {
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
 		//framebuffer; (importatn)
-		glm::vec2 m_ViewPortSize;
+		bool m_ViewportFocused = false, m_ViewportHovered = false;
+		glm::vec2 m_ViewPortSize = { 0.0f, 0.0f };
 
 		uint32_t m_MapWidth, m_MapHeight;
 		std::unordered_map<char, Engine::Ref<Engine::SubTexture2D>> s_TextureMap;
