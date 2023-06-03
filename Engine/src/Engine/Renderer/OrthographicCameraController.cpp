@@ -15,7 +15,7 @@ namespace Engine {
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
 		ENGINE_PROFILE_FUNCTION();
-
+		
 		if (Input::IsKeyPressed(EG_KEY_A))
 			m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
 		else if (Input::IsKeyPressed(EG_KEY_D))
@@ -47,9 +47,16 @@ namespace Engine {
 
 
 		// mouse pan controller
-
-
 	}
+
+
+	void OrthographicCameraController::OnResize(float width, float height)
+	{
+		m_AspectRatio = width / height;
+		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+	}
+
+
 
 	void OrthographicCameraController::OnEvent(Event& e)
 	{

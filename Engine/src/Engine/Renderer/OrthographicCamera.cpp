@@ -14,6 +14,8 @@ namespace Engine {
 
 	}
 
+
+
 	void OrthographicCamera::SetProjection(float left, float right, float bottom, float top)
 	{
 		ENGINE_PROFILE_FUNCTION();
@@ -34,5 +36,8 @@ namespace Engine {
 		m_ViewMatrix = glm::inverse(transfrom);
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix; // order imp
 	}
+
+
+
 }
 

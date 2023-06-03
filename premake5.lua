@@ -5,6 +5,8 @@ workspace "Engine"
 	startproject "Sandbox"
 	configurations {"Debug", "Development", "Ship"}
 
+	flags{ "MultiProcessorCompile"}
+
 	outputdir= "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 	--include dir relative to root folder(sln dir)
@@ -17,9 +19,11 @@ workspace "Engine"
 	IncludeDir["stb_image"] = "Engine/vendor/stb_image"
 
 	--include the glfw premake files
-	include "Engine/vendor/GLFW"
-	include "Engine/vendor/Glad"
-	include "Engine/vendor/imgui"
+	group "Dependencies"
+		include "Engine/vendor/GLFW"
+		include "Engine/vendor/Glad"
+		include "Engine/vendor/imgui"
+	group ""
 	
 
 project "Engine"
@@ -68,7 +72,47 @@ project "Engine"
 		runtime "Release"
 		optimize "on"
 
-project "Sandbox"
+
+--engine-editor;
+
+project "Engine-Editor"
+	location "Engine-Editor"
+	kind "consoleApp"
+	language "C++"
+	staticruntime "on"
+	cppdialect "c++17"
+	systemversion "latest"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
+
+	includedirs {"Engine/vendor/spdlog/include", "Engine/src","Engine/vendor", "%{IncludeDir.glm}"}
+
+	links {"Engine"}
+
+	defines {"ENGINE_PLATFORM_WINDOWS"}
+
+	filter "configurations:Debug"
+		defines "ENGINE_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Development"
+		defines "ENGINE_DEVELOPMENT"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Ship"
+		defines "ENGINE_SHIP"
+		runtime "Release"
+		optimize "on"
+
+
+
+
+	project "Sandbox"
 	location "Sandbox"
 	kind "consoleApp"
 	language "C++"

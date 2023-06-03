@@ -18,7 +18,7 @@ namespace Engine {
 	 class ENGINE_API Application
 	 {
 	 public:
-		 Application();
+		 Application(const std::string &name = "Engine");
 		 virtual ~Application();
 
 		 void Run();
@@ -31,6 +31,7 @@ namespace Engine {
 		 inline Window& GetWindow() { return *m_Window; }
 
 		 void Close();
+		 ImGuiLayer* GetImGuiLayer() { return m_ImGuiLayer; }
 
 		 inline static Application& Get() { return *s_Instance; }
 	 private:
