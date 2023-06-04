@@ -6,15 +6,16 @@
 
 #include <Engine/Core/Log.h>
 
+
 namespace Engine {
 
 	static const uint32_t s_MapWidth = 24;
 	static const char* s_MapTiles = "WWWWWWWWWWWWWWWWWWWWWWWW"
-		"WWWWWWWWWDDDDDDWWWWWWWWW"
-		"WWDDWWWWWWWWDWWWWWWWWWWW"
-		"WDDDWWWWDWWWDWWWWWWWWWWW"
-		"WWWWWWWWDDDDDWWWWWWWWWWW"
-		"WWWWWWWWWWWWWWWWWWWWWWWW";
+									"WWWWWWWWWDDDDDDWWWWWWWWW"
+									"WWDDWWWWWWWWDWWWWWWWWWWW"
+									"WDDDWWWWDWWWDWWWWWWWWWWW"
+									"WWWWWWWWDDDDDWWWWWWWWWWW"
+									"WWWWWWWWWWWWWWWWWWWWWWWW";
 
 	EditorLayer::EditorLayer()
 		: Layer("EditorLayer"), m_CameraController(1280.0f / 720.0f, true)
@@ -26,23 +27,35 @@ namespace Engine {
 	{
 		ENGINE_PROFILE_FUNCTION();
 
-		m_CheckerboardTexture1 = Engine::Texture2D::Create("assets/textures/Checkerboard2.png");
-		m_CheckerboardTexture = Engine::Texture2D::Create("assets/textures/Checkerboard.png");
-		m_SprietsheetTexture = Engine::Texture2D::Create("assets/textures/sprite-sheet.png");
+		m_CheckerboardTexture1 =  Texture2D::Create("assets/textures/Checkerboard2.png");
+		m_CheckerboardTexture =  Texture2D::Create("assets/textures/Checkerboard.png");
+		m_SprietsheetTexture =  Texture2D::Create("assets/textures/sprite-sheet.png");
 
-		m_TextureStairs = Engine::SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 1,11 }, { 128, 128 }, { 1,1 });
+		m_TextureStairs =  SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 1,11 }, { 128, 128 }, { 1,1 });
 
 		m_MapWidth = s_MapWidth;
 		m_MapHeight = strlen(s_MapTiles) / s_MapWidth;
 
-		s_TextureMap['D'] = Engine::SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 6,11 }, { 128, 128 }, { 1,1 });
-		s_TextureMap['W'] = Engine::SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 11,11 }, { 128, 128 }, { 1,1 });
+		s_TextureMap['D'] =  SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 6,11 }, { 128, 128 }, { 1,1 });
+		s_TextureMap['W'] =  SubTexture2D::CreateFromCoords(m_SprietsheetTexture, { 11,11 }, { 128, 128 }, { 1,1 });
 
 
-		Engine::FrameBufferSpecification fbSpec;
+		 FrameBufferSpecification fbSpec;
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
-		m_FrambeBuffer = Engine::FrameBuffer::Create(fbSpec);
+		m_FrambeBuffer =  FrameBuffer::Create(fbSpec);
+
+
+
+		m_ActiveScene = CreateRef<Scene>();
+
+
+		auto square = m_ActiveScene->CreateEntity();
+		m_ActiveScene->Reg().emplace<TransformComponent>(square);
+		m_ActiveScene->Reg().emplace< SpriteRendererComponent>(square, glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
+
+		m_SquareEntity = square;
+
 
 
 		m_CameraController.SetZoomLevel(5.0f);
@@ -53,13 +66,13 @@ namespace Engine {
 		ENGINE_PROFILE_FUNCTION();
 	}
 
-	void EditorLayer::OnUpdate(Engine::Timestep ts)
+	void EditorLayer::OnUpdate( Timestep ts)
 	{
 		ENGINE_PROFILE_FUNCTION();
 
 
 		// Resize
-		if (Engine::FrameBufferSpecification spec = m_FrambeBuffer->GetSpecification();
+		if ( FrameBufferSpecification spec = m_FrambeBuffer->GetSpecification();
 			m_ViewPortSize.x > 0.0f && m_ViewPortSize.y > 0.0f && // zero sized framebuffer is invalid
 			(spec.Width != m_ViewPortSize.x || spec.Height != m_ViewPortSize.y))
 		{
@@ -72,80 +85,36 @@ namespace Engine {
 		if (m_ViewportFocused)
 			m_CameraController.OnUpdate(ts);
 
+
+
 		// Render
-		Engine::Renderer2D::ResetStats();
+		 Renderer2D::ResetStats();
 		{
 			ENGINE_PROFILE_SCOPE("Renderer Prep");
 
 			m_FrambeBuffer->Bind();
-
-
-			Engine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
-			Engine::RenderCommand::Clear();
+			 RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+			 RenderCommand::Clear();
 		}
+
+		//update scene;
 
 		{
 
 			static float rotation = 0.0f;
 			rotation += ts * 200.0f;
 
-			static float x = -2.0f;
-			static float y = 0.0f;
 
-			if (Engine::Input::IsKeyPressed(EG_KEY_LEFT)) {
-				x += 1.0f * ts;
-			}
 
-			if (Engine::Input::IsKeyPressed(EG_KEY_RIGHT)) {
-				x -= 1.0f * ts;
-			}
+			 Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-			if (Engine::Input::IsKeyPressed(EG_KEY_DOWN)) {
-				y += 1.0f * ts;
-			}
-
-			if (Engine::Input::IsKeyPressed(EG_KEY_UP)) {
-				y -= 1.0f * ts;
-			}
+			m_ActiveScene->OnUpdate(ts);
 
 			ENGINE_PROFILE_SCOPE("Renderer Draw");
-			Engine::Renderer2D::BeginScene(m_CameraController.GetCamera());
-			 Engine::Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
-			 Engine::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-			 Engine::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
-			 Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture1, 10.0f);
-
-		     Engine::Renderer2D::DrawRotatedQuad({ x, y, 0.0f }, { 1.0f, 1.0f },rotation, m_CheckerboardTexture, 1.0f);
 
 
-//			for (uint32_t y = 0; y < m_MapHeight; y++) {
-//
-//				for (uint32_t x = 0; x < m_MapWidth; x++) {
-//
-//					char tileType = s_MapTiles[x + y * m_MapWidth];
-//					Engine::Ref<Engine::SubTexture2D> texture;
-//
-//					if (s_TextureMap.find(tileType) != s_TextureMap.end()) {
-//						//LOG_TRACE("TRACE: {0}", s_TextureMap[tileType]);
-//						texture = s_TextureMap[tileType];
-//					}
-//					else {
-//						texture = m_TextrueGrass1;
-//					}
-//
-//					float locX = x;
-//					float locY = y;
-//
-//					//Engine::Renderer2D::DrawQuad({ x - m_MapWidth/2.0f, m_MapHeight- y /2.0f,   0.0f }, { 1.0f, 1.0f }, texture);
-//					Engine::Renderer2D::DrawQuad({ locX - m_MapWidth / 2.0f ,  m_MapHeight - locY - m_MapHeight / 2.0f ,   0.0f }, { 1.0f, 1.0f }, texture);
-//				}
-//			}
-//
-//			Engine::Renderer2D::DrawQuad({ 25.0f, 25.0f }, { 1.0f, 1.0f }, m_CheckerboardTexture);
-//
 
-
-			Engine::Renderer2D::EndScene();
+			 Renderer2D::EndScene();
 			m_FrambeBuffer->Unbind();
 		}
 	}
@@ -206,7 +175,7 @@ namespace Engine {
 				// which we can't undo at the moment without finer window depth/z control.
 				//ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
 
-				if (ImGui::MenuItem("Exit")) Engine::Application::Get().Close();
+				if (ImGui::MenuItem("Exit"))  Application::Get().Close();
 				ImGui::EndMenu();
 			}
 
@@ -215,14 +184,16 @@ namespace Engine {
 
 		ImGui::Begin("Settings");
 
-		auto stats = Engine::Renderer2D::GetStats();
+		auto stats =  Renderer2D::GetStats();
 		ImGui::Text("Renderer2D Stats:");
 		ImGui::Text("Draw Calls: %d", stats.DrawCall);
 		ImGui::Text("Quads: %d", stats.QuadCount);
 		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
-		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+		auto& squareColor = m_ActiveScene->Reg().get<SpriteRendererComponent>(m_SquareEntity).Color;
+
+		ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
 
 		ImGui::End();
 
@@ -258,10 +229,9 @@ namespace Engine {
 
 		ImGui::End();
 	
-
 	}
 
-	void EditorLayer::OnEvent(Engine::Event& e)
+	void EditorLayer::OnEvent( Event& e)
 	{
 		m_CameraController.OnEvent(e);
 	}
