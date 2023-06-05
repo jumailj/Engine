@@ -34,7 +34,7 @@ namespace Engine {
 		Ref<Engine::SubTexture2D> m_TextrueGrass1;
 
 		Ref<Engine::Scene> m_ActiveScene;
-		entt::entity m_SquareEntity;
+		Entity m_SquareEntity;
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 

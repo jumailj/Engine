@@ -1016,6 +1016,7 @@
     </ClInclude>
     <ClInclude Include="src\Engine\Scene\Scene.h" />
     <ClInclude Include="src\Engine\Scene\Components.h" />
+    <ClInclude Include="src\Engine\Scene\Entity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application.cpp">
@@ -1106,5 +1107,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\Engine\Scene\Scene.cpp" />
+    <ClCompile Include="src\Engine\Scene\Entity.cpp" />
   </ItemGroup>
 </Project>
