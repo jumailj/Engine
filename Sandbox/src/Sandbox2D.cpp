@@ -7,7 +7,7 @@
 #include <Engine/Core/Log.h>
 
 static const uint32_t s_MapWidth = 24;
-static const char* s_MapTiles = "WWWWWWWWWWWWWWWWWWWWWWWW"
+static const char* s_MapTiles = "DDDDDWWWWWWWWWWWWWWWWWWW"
 								"WWWWWWWWWDDDDDDWWWWWWWWW"
 								"WWWWWWWWWWWWDWWWWWWWWWWW"
 								"WWWWWWWWDWWWDWWWWWWWWWWW"

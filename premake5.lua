@@ -124,7 +124,7 @@ project "Engine-Editor"
 
 	files {"%{prj.name}/src/**.h", "%{prj.name}/src/**.cpp"}
 
-	includedirs {"Engine/vendor/spdlog/include", "Engine/src","Engine/vendor", "%{IncludeDir.glm}"}
+	includedirs {"Engine/vendor/spdlog/include", "Engine/src","Engine/vendor", "%{IncludeDir.glm}",  "%{IncludeDir.entt}"}
 
 	links {"Engine"}
 
