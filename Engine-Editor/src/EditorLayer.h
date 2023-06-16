@@ -45,7 +45,7 @@ namespace Engine {
 
 		//framebuffer; (importatn)
 		bool m_ViewportFocused = false, m_ViewportHovered = false;
-		glm::vec2 m_ViewPortSize = { 0.0f, 0.0f };
+		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 
 		uint32_t m_MapWidth, m_MapHeight;
 		std::unordered_map<char, Engine::Ref<Engine::SubTexture2D>> s_TextureMap;

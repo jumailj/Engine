@@ -9,7 +9,6 @@
 
 namespace Engine {
 
-
 	static void DoMath(const glm::mat4& transform)
 	{
 
@@ -62,27 +61,26 @@ namespace Engine {
 
 	void Scene::OnUpdate(Timestep ts)
 	{
-		//redner 2d  
+		// Render 2D
 		Camera* mainCamera = nullptr;
 		glm::mat4* cameraTransform = nullptr;
 		{
-			auto group = m_Registry.view<TransformComponent, CameraComponent>();
-
-			for (auto entity : group)
+			auto view = m_Registry.view<TransformComponent, CameraComponent>();
+			for (auto entity : view)
 			{
-				auto& [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
+				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 
-				if (camera.Primary) {
+				if (camera.Primary)
+				{
 					mainCamera = &camera.Camera;
-					cameraTransform = &transform.Transfrom;
+					cameraTransform = &transform.Transform;
 					break;
 				}
 			}
 		}
 
-		if (mainCamera) {
-
-
+		if (mainCamera)
+		{
 			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
 
 			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
@@ -96,6 +94,21 @@ namespace Engine {
 			Renderer2D::EndScene();
 		}
 
+	}
+
+	void Scene::OnViewportResize(uint32_t width, uint32_t height)
+	{
+		m_ViewportWidth = width;
+		m_ViewportHeight = height;
+
+		// Resize our non-FixedAspectRatio cameras
+		auto view = m_Registry.view<CameraComponent>();
+		for (auto entity : view)
+		{
+			auto& cameraComponent = view.get<CameraComponent>(entity);
+			if (!cameraComponent.FixedAspectRatio)
+				cameraComponent.Camera.SetViewportSize(width, height);
+		}
 
 	}
 
