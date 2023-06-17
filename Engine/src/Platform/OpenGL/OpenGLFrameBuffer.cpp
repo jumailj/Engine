@@ -77,7 +77,7 @@ namespace Engine {
 		m_Specification.Width = width;
 		m_Specification.Height = height;
 
-		LOG_CORE_INFO("WINDOW RESIZED: {0}, {1}", width, height);
+		// LOG_CORE_INFO("WINDOW RESIZED: {0}, {1}", width, height);
 
 		Invalidate();
 	}

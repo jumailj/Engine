@@ -120,6 +120,9 @@
     <ClInclude Include="src\Engine\Renderer\Buffer.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Engine\Renderer\Camera.h">
+      <Filter>src\Engine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Engine\Renderer\FrameBuffer.h">
       <Filter>src\Engine\Renderer</Filter>
     </ClInclude>
@@ -163,6 +166,9 @@
       <Filter>src\Engine\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\Engine\Scene\Scene.h">
+      <Filter>src\Engine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Engine\Scene\SceneCamera.h">
       <Filter>src\Engine\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\EnginePCH.h">
@@ -1026,7 +1032,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\Engine\Scene\SceneCamera.h" />
+    <ClInclude Include="src\Engine\Scene\ScriptableEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine\Core\Application.cpp">
@@ -1089,6 +1095,9 @@
     <ClCompile Include="src\Engine\Scene\Scene.cpp">
       <Filter>src\Engine\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\Scene\SceneCamera.cpp">
+      <Filter>src\Engine\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\EnginePCH.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -1122,7 +1131,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine\Renderer\Camera.h" />
-    <ClCompile Include="src\Engine\Scene\SceneCamera.cpp" />
   </ItemGroup>
 </Project>

@@ -167,6 +167,7 @@
     <ClInclude Include="src\Engine\Events\MouseEvent.h" />
     <ClInclude Include="src\Engine\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Engine\Renderer\Buffer.h" />
+    <ClInclude Include="src\Engine\Renderer\Camera.h" />
     <ClInclude Include="src\Engine\Renderer\FrameBuffer.h" />
     <ClInclude Include="src\Engine\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\Engine\Renderer\OrthographicCamera.h" />
@@ -182,8 +183,9 @@
     <ClInclude Include="src\Engine\Scene\Components.h" />
     <ClInclude Include="src\Engine\Scene\Entity.h" />
     <ClInclude Include="src\Engine\Scene\Scene.h" />
-    <ClInclude Include="src\EnginePCH.h" />
     <ClInclude Include="src\Engine\Scene\SceneCamera.h" />
+    <ClInclude Include="src\EnginePCH.h" />
+    <ClInclude Include="src\Engine\Scene\ScriptableEntity.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -479,7 +481,6 @@
     <ClCompile Include="src\Engine\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Engine\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Engine\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\Engine\Renderer\Camera.h" />
     <ClCompile Include="src\Engine\Renderer\FrameBuffer.cpp" />
     <ClCompile Include="src\Engine\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Engine\Renderer\OrthographicCameraController.cpp" />
@@ -493,10 +494,10 @@
     <ClCompile Include="src\Engine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\Engine\Scene\Entity.cpp" />
     <ClCompile Include="src\Engine\Scene\Scene.cpp" />
+    <ClCompile Include="src\Engine\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\EnginePCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Engine\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLFrameBuffer.cpp" />
