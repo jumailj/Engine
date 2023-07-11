@@ -6,7 +6,7 @@
 
 namespace Engine {
 
-	class OpenGLTexture2D : public Texture2D
+	class OpenGLTexture2D : public Texture2D 
 	{
 	public:
 		OpenGLTexture2D(uint32_t width, uint32_t height);

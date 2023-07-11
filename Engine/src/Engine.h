@@ -7,6 +7,7 @@
 
 #include "Engine/Core/Timestep.h"
 
+//--------controlls--------------------------
 #include "Engine/Core/Input.h"
 #include "Engine/Core/KeyCodes.h"
 #include "Engine/Core/MouseButtonCodes.h"
@@ -14,6 +15,11 @@
 
 
 #include "Engine/ImGui/ImGuiLayer.h"
+
+#include "Engine/Scene/Scene.h"
+#include "Engine/Scene/Entity.h"
+#include "Engine/Scene/ScriptableEntity.h"
+#include "Engine/Scene/Components.h"
 
 
 //-----------Renderere-------------------------
