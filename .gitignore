@@ -9,6 +9,9 @@
 **.tlog
 
 
+*.vcxproj
+*.vcxproj.filters
+
 #folders
 /bin
 /bin-int

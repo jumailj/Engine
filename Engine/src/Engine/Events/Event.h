@@ -2,7 +2,8 @@
 #include <EnginePCH.h>
 
 #include <Engine/Core/Core.h>
-#include <spdlog/fmt/ostr.h> // ostream(operator overloading spdlog)
+//#include <spdlog/fmt/ostr.h> // ostream(operator overloading spdlog)
+//#include <spdlog/fmt/bundled/ostr.h> // ostream(operator overloading fmt)
 
 namespace Engine {
 

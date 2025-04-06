@@ -7,13 +7,12 @@
 #include <Engine/Core/Log.h>
 
 static const uint32_t s_MapWidth = 24;
-static const char* s_MapTiles = "DDDDDWWWWWWWWWWWWWWWWWWW"
-								"WWWWWWWWWDDDDDDWWWWWWWWW"
-								"WWWWWWWWWWWWDWWWWWWWWWWW"
+static const char* s_MapTiles = "DDDDDWWWWWWWWWWWWWWWWWWD"
+								"WWWWWWWWWDDDDDDWWWWWWWWD"
+								"WWWWWWWWWWWWDWWWWWWWWWWD"
 								"WWWWWWWWDWWWDWWWWWWWWWWW"
-								"WWWWWWWWDDDDDWWWWWWWWWWW"
+								"WWWWWWWWDDDDDWWWWWWDWWWW"
 								"WWWWWWWWWWWWWWWWWWWWWWWW";
-
 
 Sandbox2D::Sandbox2D()
 	: Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, false)
@@ -89,12 +88,12 @@ void Sandbox2D::OnUpdate(Engine::Timestep ts)
 
 		ENGINE_PROFILE_SCOPE("Renderer Draw");
 		Engine::Renderer2D::BeginScene(m_CameraController.GetCamera());
-		// Engine::Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
-		// Engine::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-		// Engine::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
-	//	 Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture1, 10.0f);
+	    Engine::Renderer2D::DrawRotatedQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, -45.0f, { 0.8f, 0.2f, 0.3f, 1.0f });
+		Engine::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+		Engine::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
+	    Engine::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture1, 10.0f);
 
-	//	 Engine::Renderer2D::DrawRotatedQuad({ x, y, 0.0f }, { 1.0f, 1.0f }, 0.0, m_CheckerboardTexture, 1.0f);
+	    Engine::Renderer2D::DrawRotatedQuad({ x, y, 0.0f }, { 1.0f, 1.0f }, 0.0, m_CheckerboardTexture, 1.0f);
 
 
 		for (uint32_t y = 0; y < m_MapHeight; y++) {

@@ -30,7 +30,7 @@ project "Engine"
 	location "Engine"
 	kind "StaticLib" --dll
 	language "C++"
-	staticruntime "on"
+	staticruntime "off"
 	cppdialect "c++17"
 	systemversion "latest"
 
@@ -48,7 +48,8 @@ project "Engine"
 	links { "GLFW","Glad","ImGui", "opengl32.lib"}
 									  
 
-	defines {"ENGINE_PLATFORM_WINDOWS", "ENGINE_BUILD_DLL", "GLFW_INCLUDE_NONE"}
+	 defines {"ENGINE_PLATFORM_WINDOWS", "ENGINE_BUILD_DLL", "GLFW_INCLUDE_NONE"}
+	-- defines {"ENGINE_PLATFORM_WINDOWS", "GLFW_INCLUDE_NONE"}
 
 	--postbuildcommands
 	--{
@@ -79,7 +80,7 @@ project "Engine-Editor"
 	location "Engine-Editor"
 	kind "consoleApp"
 	language "C++"
-	staticruntime "on"
+	staticruntime "off"
 	cppdialect "c++17"
 	systemversion "latest"
 
@@ -115,7 +116,7 @@ project "Engine-Editor"
 	location "Sandbox"
 	kind "consoleApp"
 	language "C++"
-	staticruntime "on"
+	staticruntime "off"
 	cppdialect "c++17"
 	systemversion "latest"
 
